@@ -10,6 +10,15 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%= form.label :title,"タイトル", class: "control-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image_name,"サムネイル", class: "control-label" %>
+    <%= form.file_field :image_name, accept: 'image/jpg,image/jpeg,image/png,image/gif', class: "form-control" %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
