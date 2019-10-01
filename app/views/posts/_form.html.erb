@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :tag_list,"タグ（,区切りで入力してください）", class: "control-label" %>
+    <%= form.text_field :tag_list, class: "form-control" %>
+  </div>
+
+  <div class="field">
     <%= form.label :content, class: "control-label" %>
     <%= form.rich_text_area :content %>
   </div>

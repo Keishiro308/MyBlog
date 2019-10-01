@@ -25,11 +25,17 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(
+      title:post_params[:title],
+      content:post_params[:content],
+      image_name: post_params[:image_name],
+      user_id: post_params[:user_id])
+    tag_list = post_params[:tag_list].split(',')
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: '投稿できました' }
         format.json { render :show, status: :created, location: @post }
+        @post.save_posts(tag_list)
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -70,6 +76,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :user_id, :image_name, :content)
+      params.require(:post).permit(:title, :user_id, :image_name, :content,:tag_list)
     end
 end
