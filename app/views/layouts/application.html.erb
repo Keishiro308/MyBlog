@@ -33,10 +33,10 @@
     </nav>
 
     <%if notice %>
-    <p id="notice alert alert-info"><%= notice %></p>
+    <div id="notice" class="alert alert-info"><%= notice %></div>
     <%end%>
     <%if alert %>
-    <p id="alert alert-danger"><%= alert %></p>
+    <div id="alert" class="alert alert-danger"><%= alert %></div>
     <%end%>
     <%= yield %>
   </body>

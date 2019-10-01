@@ -10,17 +10,24 @@
       </ul>
     </div>
   <% end %>
+
   <div class="field">
     <%= form.label :title,"タイトル", class: "control-label" %>
     <%= form.text_field :title, class: "form-control" %>
   </div>
 
   <div class="field">
+    <%= form.label :content, class: "control-label" %>
+    <%= form.rich_text_area :content %>
+  </div>
+
+  <div class="field">
     <%= form.label :image_name,"サムネイル", class: "control-label" %>
     <%= form.file_field :image_name, accept: 'image/jpg,image/jpeg,image/png,image/gif', class: "form-control" %>
   </div>
+  <%= form.hidden_field :user_id, value: current_user.id %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class => 'btn btn-dark'%>
   </div>
 <% end %>
