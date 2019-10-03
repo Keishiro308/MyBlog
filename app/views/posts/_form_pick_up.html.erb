@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1">
+      <h1>ピックアップする記事</h1>
+      <%= form_with( local: true, url: posts_pick_up_update_path) do |form| %>
+      <div class="field">
+        <ul>
+          <% @posts.each do |post| %>
+          <li>
+            <% if post.pick_up %>
+            <%= form.check_box "params[pick_up][#{post.id}]", {checked: true},checked_value = "true",unchecked_value = "false" %>
+            <%= post.title %>
+            <% else %>
+            <%= form.check_box "params[pick_up][#{post.id}]",{} ,checked_value="true", unchecked_value="false" %>
+            <%= post.title %>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="actions">
+        <%= form.submit :class => 'btn btn-dark'%>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>

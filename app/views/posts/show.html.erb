@@ -3,9 +3,10 @@
     <div class="col-sm-10 offset-sm-1">
       <h1><%= @post.title %></h1>
       <div class="icon-tag">
+        <%= icon('fas','tag') %>
         <% @post.tags.each do |tag|%>
-          <div class="badge badge-primary">
-            <%=  tag.name %>
+          <div class="badge badge-primary tag-badge">
+            <%= link_to tag.name, "/posts/tagged/#{tag.id}" %>
           </div>
         <%end%>
       </div>
@@ -13,7 +14,9 @@
         <span class="clock"><%= icon('far','clock')%></span><%=simple_time(@post.created_at) %>
       </div>
       <div class="content-wrap">
-        <%= image_tag @post.image_name.thumb.url%>
+        <div class="thumb-container">
+          <%= image_tag @post.image_name.thumb.url%>
+        </div>
         <p><%= @post.content %></p>
       </div>
     </div>

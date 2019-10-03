@@ -39,5 +39,17 @@
     <div id="alert" class="alert alert-danger"><%= alert %></div>
     <%end%>
     <%= yield %>
+    <footer>
+      <div class="footer-wrap">
+        <h4>TAGS</h4>
+        <hr>
+        <% tags = Tag.all %>
+        <%tags.each  do |tag| %>
+        <%= link_to tag.name, "/posts/tagged/#{tag.id}" %>
+        <%end%>
+      </div>
+    </footer>
+
+
   </body>
 </html>

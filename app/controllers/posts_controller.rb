@@ -1,16 +1,27 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  PER=8
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page]).per(PER).order(created_at: "DESC")
+    @pickup_posts =  Post.where(pick_up: true)
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
 
+  end
+
+  def tag
+    @tag = Tag.find_by(id: params[:tag])
+    @posts = @tag.posts.page(params[:page]).per(PER).order(created_at: "DESC")
+  end
+
+  def pick_up
+    @posts=Post.all.order(created_at: "DESC")
   end
 
   # GET /posts/new
@@ -47,10 +58,15 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
 
+    tag_list = post_params[:tag_list].split(',')
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(title:post_params[:title],
+        content:post_params[:content],
+        image_name: post_params[:image_name],
+        user_id: post_params[:user_id])
         format.html { redirect_to @post, notice: '編集できませんでした' }
         format.json { render :show, status: :ok, location: @post }
+        @post.save_posts(tag_list)
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -68,6 +84,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def pick_up_update
+    for i in Post.all.ids do
+      @post=Post.find_by(id: i)
+      @post.update(pick_up: params[:params][:pick_up][i.to_s])
+    end
+    redirect_to("/")
+    # ①全部確認
+    # render plain: params.inspect
+    # ②特定値のみ確認
+    # render plain: params[:params][:pick_up]["25"].inspect
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -76,6 +104,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :user_id, :image_name, :content,:tag_list)
+      params.require(:post).permit(:title, :user_id, :image_name, :content, :tag_list)
     end
 end

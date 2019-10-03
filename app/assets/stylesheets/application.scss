@@ -24,3 +24,20 @@ body{
 .container{
   background: white;
 }
+
+footer{
+  background: #343a40;
+  .footer-wrap{
+    padding: 20px 90px;
+    hr{
+      background-color: white;
+    }
+    h4{
+      color: white;
+    }
+    a{
+      font-size: 20px;
+    }
+  }
+
+}

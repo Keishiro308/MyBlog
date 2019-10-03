@@ -6,8 +6,13 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+import "jquery"
+global.$ = require('jquery')
+import 'bootstrap'
 
-require("@rails/ujs").start()
+import "../src/js/slideshow";
+
+
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
@@ -22,3 +27,6 @@ require("channels")
 
 require("trix")
 require("@rails/actiontext")
+import Rails from 'rails-ujs';
+
+Rails.start();

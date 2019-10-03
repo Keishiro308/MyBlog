@@ -63,7 +63,9 @@ gem 'font-awesome-sass', '~> 5.11.2'
 
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
-
+#uploader
 gem 'carrierwave', '~> 2.0'
-
+#thumbnail making
 gem 'rmagick'
+#pagination
+gem 'kaminari'
