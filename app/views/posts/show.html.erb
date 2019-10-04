@@ -1,6 +1,6 @@
 <div class="container archive-wrap">
   <div class="row">
-    <div class="col-sm-10 offset-sm-1">
+    <div class="col-md-10 offset-md-1 col-sm-12">
       <h1><%= @post.title %></h1>
       <div class="icon-tag">
         <%= icon('fas','tag') %>
@@ -15,8 +15,9 @@
       </div>
       <div class="content-wrap">
         <div class="thumb-container">
-          <%= image_tag @post.image_name.thumb.url%>
+          <%= image_tag @post.image_name.url%>
         </div>
+        <hr>
         <p><%= @post.content %></p>
       </div>
     </div>

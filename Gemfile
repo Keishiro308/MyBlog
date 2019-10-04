@@ -69,3 +69,5 @@ gem 'carrierwave', '~> 2.0'
 gem 'rmagick'
 #pagination
 gem 'kaminari'
+#search
+gem 'ransack', github: 'activerecord-hackery/ransack'

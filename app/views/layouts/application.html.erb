@@ -21,14 +21,11 @@
           <li class="nav-item active">
             <a class="nav-link" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <%= search_form_for @q, class:"form-inline" do |f| %>
+          <%= f.search_field :title_cont, class:"form-control mr-md-2", placeholder:"タイトル検索" %>
+          <%= f.submit class:"btn btn-outline-success"%>
+        <% end %>
       </div>
     </nav>
 
@@ -45,7 +42,9 @@
         <hr>
         <% tags = Tag.all %>
         <%tags.each  do |tag| %>
-        <%= link_to tag.name, "/posts/tagged/#{tag.id}" %>
+        <%= link_to "/posts/tagged/#{tag.id}" do %>
+        <%= "#{tag.name}(#{tag.taggings.count})"%>
+        <%end%>
         <%end%>
       </div>
     </footer>

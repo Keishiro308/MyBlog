@@ -30,12 +30,12 @@ class PostImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :thumbmini do
-    process resize_to_fit: [350, 200]
-  end
-  version :thumb do
-    process resize_to_fit: [700, 400]
-  end
+  # version :thumbmini do
+  #   process resize_and_pad: [350, 200]
+  # end
+  # version :thumb do
+  #   process resize_and_pad: [700, 400]
+  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -50,9 +50,7 @@ class PostImageUploader < CarrierWave::Uploader::Base
  # ファイル名は日本語が入ってくると嫌なので、下記のようにしてみてもいい。
  # 日付(20131001.jpgみたいなファイル名)で保存する
   def filename
-    time = Time.now
-    name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
-    name.downcase
+    "#{secure_token}" + '.jpg'
   end
 
   # Override the filename of the uploaded files:
@@ -60,7 +58,11 @@ class PostImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
+  protected
+  def secure_token
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+  end
 
 
 end

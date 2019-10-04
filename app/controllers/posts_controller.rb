@@ -1,12 +1,15 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_search_post, only: [:show, :edit, :update, :destroy,:tag]
   PER=8
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.page(params[:page]).per(PER).order(created_at: "DESC")
+    # @posts = Post.page(params[:page]).per(PER).order(created_at: "DESC")
     @pickup_posts =  Post.where(pick_up: true)
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.includes(:tags).page(params[:page]).per(PER).order(created_at: "DESC")
   end
 
   # GET /posts/1
@@ -102,8 +105,13 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    def set_search_post
+      @q = Post.ransack(params[:q])
+      @search_posts = @q.result.includes(:tags).page(params[:page]).per(PER).order(created_at: "DESC")
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :user_id, :image_name, :content, :tag_list)
+      params.require(:post).permit(:title, :image_name, :content, :tag_list)
     end
 end

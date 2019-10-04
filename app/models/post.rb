@@ -1,10 +1,9 @@
 class Post < ApplicationRecord
-  has_many :taggings, dependent: :destroy
+  has_many :taggings, :dependent => :destroy
   has_many :tags, through: :taggings
   mount_uploader :image_name, PostImageUploader
   has_rich_text :content
 
-  validates :user_id, presence: true
   validates :title, presence: true
 
   def save_posts(savepost_tags)

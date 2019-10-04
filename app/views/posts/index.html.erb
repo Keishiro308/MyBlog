@@ -8,14 +8,13 @@
   <div class="carousel-inner">
     <% @pickup_posts.each do |pickup| %>
     <div class="carousel-item">
-      <%= link_to "/posts/#{pickup.id}" do %>
       <div class="slide-image">
-        <%= image_tag pickup.image_name.thumb.url %>
+        <%= link_to "/posts/#{pickup.id}" do %>
+        <%= image_tag pickup.image_name.url %>
         <div class="title-wrap">
           <%= pickup.title %>
         </div>
       </div>
-      <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: First slide"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg> -->
       <% end %>
     </div>
     <% end %>
@@ -25,16 +24,16 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-10 offset-sm-1">
+    <div class="col-md-7">
       <% @posts.each do |post| %>
         <div class="card mb-3">
           <div class="row no-gutters">
-            <div class="col-sm-6 image-box">
+            <div class="col-md-6 image-box">
               <%= link_to "/posts/#{post.id}" do %>
-              <%= image_tag post.image_name.thumbmini.url %>
+              <%= image_tag post.image_name.url %>
               <%end%>
             </div>
-            <div class="col-sm-6">
+            <div class="col-md-6">
               <div class="card-body">
                 <div class="inner">
                   <h3 class="card-title"><%=link_to post.title, "/posts/#{post.id}" %></h3>
@@ -49,7 +48,26 @@
         </div>
       <% end %>
     </div>
+
+    <div class="col-md-5">
+      <div class="pickup">
+        <h3>ピックアップ記事</h3>
+        <div class="contents-wrap">
+          <% @pickup_posts.each do |pickup| %>
+          <div class="content">
+            <div class="content-image">
+              <%= image_tag pickup.image_name.url %>
+            </div>
+            <div class="content-title">
+              <%= pickup.title %>
+            </div>
+          </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
   </div>
+
   <div class="paginate-container">
     <%= paginate @posts %>
   </div>
