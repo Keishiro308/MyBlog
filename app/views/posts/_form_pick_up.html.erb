@@ -4,7 +4,7 @@
       <h1>ピックアップする記事</h1>
       <%= form_with( local: true, url: posts_pick_up_update_path) do |form| %>
       <div class="field">
-        <ul>
+        <ul class="pick_up_scroll">
           <% @posts.each do |post| %>
           <li>
             <% if post.pick_up %>

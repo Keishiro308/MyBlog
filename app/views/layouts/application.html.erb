@@ -41,11 +41,15 @@
         <h4>TAGS</h4>
         <hr>
         <% tags = Tag.all %>
-        <%tags.each  do |tag| %>
-        <%= link_to "/posts/tagged/#{tag.id}" do %>
-        <%= "#{tag.name}(#{tag.taggings.count})"%>
-        <%end%>
-        <%end%>
+        <ul>
+          <%tags.each  do |tag| %>
+          <li>
+            <%= link_to "/posts/tagged/#{tag.id}" do %>
+            <%= "#{tag.name}(#{tag.taggings.count})"%>
+            <%end%>
+          </li>
+          <%end%>
+        </ul>
       </div>
     </footer>
 
