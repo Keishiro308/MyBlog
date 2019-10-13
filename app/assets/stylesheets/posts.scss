@@ -1,6 +1,35 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$pc: 961px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+$breakpoint: 960px;
+
+@mixin pc {
+  @media screen and (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media screen and (min-width: ($sp)) and (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media screen and (max-width: ($sp)) {
+    @content;
+  }
+}
+@mixin breakpoint {
+  @media screen and (min-width: ($tab)) and (max-width: ($breakpoint)) {
+    @content;
+  }
+}
+/*-----------------------------------
+index
+------------------------*/
+
 .carousel{
   margin-bottom: 30px;
   padding-bottom: 40px;
@@ -14,80 +43,349 @@
       margin:0 10px;
     }
   }
-  .carousel-inner{
-    text-align: center;
-    .carousel-item{
+  @include breakpoint{
+    .carousel-inner{
+      .carousel-item{
+        text-align: center;
+        .slide-image{
+          margin: auto;
+          position: relative;
+          width: 60vw;
+          height: 40vh;
+          img{
+            width: 60vw;
+            height: 40vh;
+          }
+          .image-title{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: 1.5rem;
+            text-align: center;
+            background: rgba(#2f2f2f, 0.66);
+            width: 60vw;
+            padding: 20px;
+            color: white;
+          }
+        }
+        .carousel-article-wrap{
+          .carousel-title-wrap{
+            display: none;
+          }
+          .carousel-content-wrap{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  @include sp{
+    .carousel-inner{
+      .carousel-item{
+        text-align: center;
+        .slide-image{
+          margin: auto;
+          position: relative;
+          width: 100vw;
+          height: 40vh;
+          img{
+            width: 100vw;
+            height: 40vh;
+          }
+          .image-title{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: 1.5rem;
+            text-align: center;
+            background: rgba(#2f2f2f, 0.66);
+            width: 100vw;
+            padding: 20px;
+            color: white;
+          }
+        }
+        .carousel-article-wrap{
+          .carousel-title-wrap{
+            display: none;
+          }
+          .carousel-content-wrap{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  @include pc{
+    .carousel-inner{
       text-align: center;
-      .slide-image{
+      max-height: 40vh;
+      width: 960px;
+      height: 360px;
+      margin: 0 auto;
+      .carousel-item{
+        .carousel-wrap{
+          margin: 0;
+          display: flex;
+          .slide-image{
+            box-sizing: border-box;
+            .image-title{
+              display: none;
+            }
+            img{
+              width: 632px;
+              height: 360px;
+              object-fit: cover;
+            }
+          }
+          .carousel-article-wrap{
+            width: 328px;
+            height: 360px;
+            box-sizing: border-box;
+            max-height: 100%;
+            background: white;
+            .carousel-title-wrap{
+              text-align: center;
+              background: white;
+              padding: 30px;
+              a{
+                color: black;
+                h3{
+                  font-size: 2rem;
+                }
+
+              }
+            }
+            .carousel-content-wrap{
+              overflow: hidden;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.article-wrap{
+  @include pc{
+    margin-top: 20px;
+    filter: drop-shadow(5px 5px rgb(168, 168, 168));
+    transition: .3s;
+    &:hover{
+      filter: drop-shadow(5px 5px 15px rgb(168, 168, 168));
+      transition: .3s;
+      transform: translate(-5px,-5px);
+    }
+    .article{
+      padding: 0;
+      display: flex;
+      margin-bottom: 10px;
+      .image-box{
+        overflow: hidden;
+        width: 50%;
+        box-sizing: border-box;
+        a{
+          img{
+            width: 100%;
+            height: 200px;
+          }
+        }
+      }
+      .body-box{
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+        height: 200px;
+        overflow: hidden;
+        background: white;
+        .article-body{
+          .inner{
+            overflow: hidden;
+            a{
+              color: black;
+            }
+          }
+          .publish-time-wrap{
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            overflow: hidden;
+            background: white;
+            border-top: 1px dotted rgb(135, 132, 135);
+            padding: 10px;
+            text-align: right;
+            color: rgb(135, 132, 135);
+          }
+        }
+      }
+    }
+  }
+
+
+  @include breakpoint{
+    margin-top: 20px;
+    filter: drop-shadow(5px 5px rgb(168, 168, 168));
+    transition: .3s;
+    &:hover{
+      filter: drop-shadow(5px 5px 15px rgb(168, 168, 168));
+      transition: .3s;
+      transform: translate(-5px,-5px);
+    }
+    .article{
+      padding: 0;
+      display: flex;
+      margin-bottom: 10px;
+      .image-box{
+        overflow: hidden;
+        width: 50%;
+        box-sizing: border-box;
+        a{
+          img{
+            width: 100%;
+            height: 200px;
+          }
+        }
+      }
+      .body-box{
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+        height: 200px;
+        overflow: hidden;
+        background: white;
+        .article-body{
+          .inner{
+            overflow: hidden;
+            a{
+              color: black;
+            }
+          }
+          .publish-time-wrap{
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            overflow: hidden;
+            background: white;
+            border-top: 1px dotted rgb(135, 132, 135);
+            padding: 10px;
+            text-align: right;
+            color: rgb(135, 132, 135);
+          }
+        }
+      }
+    }
+  }
+
+
+  @include tab{
+    margin-top: 20px;
+
+    .article{
+      border: 1px solid black;
+      padding: 0;
+      display: block;
+      margin-bottom: 10px;
+      .image-box{
+        overflow: hidden;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+        a{
+          img{
+            width: 100%;
+            height: 200px;
+          }
+        }
+      }
+      .body-box{
         margin-left: auto;
         margin-right: auto;
         position: relative;
-        width: 500px;
-        height: 300px;
-        &:hover {
-          .title-wrap{
-          text-decoration: underline;
-        }
-      }
-        img{
-          width: 500px;
-          height: 300px;
-        }
-        .title-wrap{
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          font-size: 1.5rem;
-          margin-left: auto;
-          text-align: center;
-          background: rgba(#2f2f2f, 0.66);
-          width: 500px;
-          padding: 30px;
-          color: white;
+        width: 80%;
+        box-sizing: border-box;
+        height: 200px;
+        overflow: hidden;
+        background: white;
+        .article-body{
+          .inner{
+            overflow: hidden;
+            a{
+              color: black;
+            }
+          }
+          .publish-time-wrap{
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            overflow: hidden;
+            background: white;
+            border-top: 1px dotted rgb(135, 132, 135);
+            padding: 10px;
+            text-align: right;
+            color: rgb(135, 132, 135);
+          }
         }
       }
     }
   }
-}
-.card{
-  margin-top: 20px;
-  filter: drop-shadow(5px 5px rgb(168, 168, 168));
-  transition: .3s;
-  &:hover{
-    filter: drop-shadow(5px 5px 15px rgb(168, 168, 168));
-    transition: .3s;
-    transform: translate(-5px,-5px);
-  }
-  .image-box{
-    overflow: hidden;
-    img{
-      width: 300px;
-      height: 200px;
-    }
-  }
-  .card-body{
-    position: relative;
 
-    .inner{
-      height: 10rem;
-      overflow: hidden;
-      a{
-        color: black;
+
+  @include sp{
+    margin-top: 20px;
+    border: 1px solid rgb(180, 180, 180);
+    text-align: center;
+    margin-bottom: 10px;
+    .article{
+      padding: 0;
+      display: block;
+      margin-bottom: 10px;
+      .image-box{
+        overflow: hidden;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+        a{
+          img{
+            width: 100%;
+            height: 200px;
+          }
+        }
+      }
+      .body-box{
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        height: 200px;
+        overflow: hidden;
+        background: white;
+        .article-body{
+          .inner{
+            overflow: hidden;
+            a{
+              color: black;
+            }
+          }
+          .publish-time-wrap{
+            width: 100%;
+            position: absolute;
+            bottom: 0px;
+            overflow: hidden;
+            background: white;
+            border-top: 1px dotted rgb(135, 132, 135);
+            padding: 10px;
+            text-align: right;
+            color: rgb(135, 132, 135);
+          }
+        }
       }
     }
-
-    .publish-time-wrap{
-      width: 90%;
-      position: absolute;
-      bottom: 0px;
-      overflow: hidden;
-      background: white;
-      border-top: 1px dotted rgb(135, 132, 135);
-      padding: 10px;
-      text-align: right;
-      color: rgb(135, 132, 135);
-    }
   }
+
+
 }
 .pickup{
   background-color: white;
@@ -97,6 +395,7 @@
   align-content: center;
   text-align: center;
   flex-flow: column;
+  border: 1px solid  black;
   h3{
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
@@ -115,55 +414,109 @@
           max-height: 100%;
         }
       }
-    }
-  }
-}
-.archive-wrap{
-  width: 100%;
-  padding: 20px;
-  padding-bottom: 0;
-  background-color: white;
-  .icon-publish{
-    text-align: right;
-    margin-bottom: 10px;
-    .clock{
-      margin-right: 5px;
-    }
-    .content-wrap{
-      .thumb-container{
-        img{
-          max-width: 80%;
+      .content-title{
+        h4{
+          color: black;
         }
       }
     }
   }
+}
 
-  .icon-tag{
-    .tag-badge{
-      a{
-        color: white;
+/*------------------------
+show
+------------------------*/
+.archive-wrap{
+  @include pc{
+    width: 100%;
+    padding: 20px;
+    padding-bottom: 0;
+    background-color: white;
+    .icon-publish{
+      text-align: right;
+      margin-bottom: 10px;
+      .clock{
+        margin-right: 5px;
+      }
+      .content-wrap{
+        .thumb-container{
+          img{
+            max-width: 80%;
+          }
+        }
+      }
+    }
+    .icon-tag{
+      .tag-badge{
+        a{
+          color: white;
+        }
+      }
+    }
+    .content-wrap{
+      p{
+        line-height: 1.7rem;
+      }
+      .thumb-container{
+        display: flex;
+        justify-content: center;
+        img{
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+    .col-sm-12{
+      padding: 0;
+      .post-footer{
+        background: rgb(212, 211, 212);
+        .fas{
+          margin-left: 20px;
+          margin-right: 10px;
+        }
       }
     }
   }
-  .content-wrap{
-    p{
-      line-height: 1.7rem;
-    }
-    .thumb-container{
-      display: flex;
-      justify-content: center;
-      img{
-        margin-bottom: 1.5rem;
+  @include breakpoint{
+    width: 100%;
+    padding: 20px;
+    padding-bottom: 0;
+    background-color: white;
+    margin: auto;
+    .icon-publish{
+      text-align: right;
+      margin-bottom: 10px;
+      .clock{
+        margin-right: 5px;
       }
     }
-  }
-  .col-sm-12{
-    padding: 0;
-    .post-footer{
-      background: rgb(212, 211, 212);
-      .fas{
-        margin-left: 20px;
-        margin-right: 10px;
+    .content-wrap{
+      .trix-content{
+        line-height: 1.7rem;
+      }
+      .thumb-container{
+        display: flex;
+        justify-content: center;
+        img{
+          max-width: 80%;
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+    .icon-tag{
+      .tag-badge{
+        a{
+          color: white;
+        }
+      }
+    }
+    .col-sm-12{
+      padding: 0;
+      .post-footer{
+        background: rgb(212, 211, 212);
+        .fas{
+          margin-left: 20px;
+          margin-right: 10px;
+        }
       }
     }
   }
@@ -178,3 +531,7 @@
   max-height: 100vh;
   overflow: auto;
 }
+
+/*-----------------------------------
+MEDIA
+------------------------*/

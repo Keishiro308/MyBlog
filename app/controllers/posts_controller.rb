@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :set_search_post
-  PER=8
+
+
 
   # GET /posts
   # GET /posts.json
@@ -42,8 +42,7 @@ class PostsController < ApplicationController
     @post = Post.new(
       title:post_params[:title],
       content:post_params[:content],
-      image_name: post_params[:image_name],
-      user_id: post_params[:user_id])
+      image_name: post_params[:image_name])
     tag_list = post_params[:tag_list].split(',')
     respond_to do |format|
       if @post.save
@@ -105,10 +104,7 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    def set_search_post
-      @q = Post.ransack(params[:q])
-      @search_posts = @q.result.includes(:tags).page(params[:page]).per(PER).order(created_at: "DESC")
-    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params

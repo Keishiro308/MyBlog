@@ -30,9 +30,8 @@
     <%= form.label :image_name,"サムネイル", class: "control-label" %>
     <%= form.file_field :image_name, accept: 'image/jpg,image/jpeg,image/png,image/gif', class: "form-control" %>
   </div>
-  <%= form.hidden_field :user_id, value: current_user.id %>
 
   <div class="actions">
-    <%= form.submit :class => 'btn btn-dark'%>
+    <%= form.submit :class => 'btn btn-dark', :value => '投稿する' %>
   </div>
 <% end %>

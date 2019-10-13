@@ -1,4 +1,4 @@
-
+<% if @pickup_posts %>
 <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <% @pickup_posts.each_with_index do |pickup,i| %>
@@ -8,39 +8,52 @@
   <div class="carousel-inner">
     <% @pickup_posts.each do |pickup| %>
     <div class="carousel-item">
-      <div class="slide-image">
-        <%= link_to "/posts/#{pickup.id}" do %>
-        <%= image_tag pickup.image_name.url %>
-        <div class="title-wrap">
-          <%= pickup.title %>
+      <div class="carousel-wrap">
+        <div class="slide-image">
+          <%= link_to "/posts/#{pickup.id}" do %>
+          <%= image_tag pickup.image_name.url %>
+          <div class="image-title">
+            <h3><%= pickup.title %></h3>
+          </div>
+          <% end %>
+        </div>
+        <div class="carousel-article-wrap">
+          <div class="carousel-title-wrap">
+            <%= link_to "/posts/#{pickup.id}" do %>
+              <h3><%= pickup.title %></h3>
+            <% end %>
+          </div>
+          <div class="carousel-content-wrap">
+            <%= pickup.content %>
+          </div>
         </div>
       </div>
-      <% end %>
     </div>
     <% end %>
   </div>
 </div>
+<% end %>
 
 
 <div class="container">
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-8 col-sm-12">
       <% @posts.each do |post| %>
-        <div class="card mb-3">
-          <div class="row no-gutters">
-            <div class="col-md-6 image-box">
+        <div class="article-wrap">
+          <div class="article">
+            <div class="image-box">
               <%= link_to "/posts/#{post.id}" do %>
               <%= image_tag post.image_name.url %>
               <%end%>
             </div>
-            <div class="col-md-6">
-              <div class="card-body">
+            <div class="body-box">
+              <div class="article-body">
                 <div class="inner">
-                  <h3 class="card-title"><%=link_to post.title, "/posts/#{post.id}" %></h3>
+                  <h3 class="article-title"><%=link_to post.title, "/posts/#{post.id}" %></h3>
                   <p><%= post.content %></p>
                 </div>
                 <div class="publish-time-wrap">
-                  <p class="card-text"><%= simple_time(post[:created_at]) %></p>
+                  <p class="article-text"><%= simple_time(post[:created_at]) %></p>
                 </div>
               </div>
             </div>
@@ -49,19 +62,21 @@
       <% end %>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-4">
       <div class="pickup">
         <h3>ピックアップ記事</h3>
         <div class="contents-wrap">
           <% @pickup_posts.each do |pickup| %>
-          <div class="content">
-            <div class="content-image">
-              <%= image_tag pickup.image_name.url %>
+            <%= link_to post_path(pickup) do %>
+            <div class="content">
+              <div class="content-image">
+                <%= image_tag pickup.image_name.url %>
+              </div>
+              <div class="content-title">
+                <h4><%= pickup.title %></h4>
+              </div>
             </div>
-            <div class="content-title">
-              <%= pickup.title %>
-            </div>
-          </div>
+            <%end%>
           <%end%>
         </div>
       </div>
