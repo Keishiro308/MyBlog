@@ -21,6 +21,7 @@ class PostsController < ApplicationController
   def tag
     @tag = Tag.find_by(id: params[:tag])
     @posts = @tag.posts.page(params[:page]).per(PER).order(created_at: "DESC")
+    @pickup_posts =  Post.where(pick_up: true)
   end
 
   def pick_up
