@@ -18,6 +18,33 @@
   @import 'font-awesome';
   @import 'bootstrap';
 
+
+  $pc: 961px; // PC
+  $tab: 680px; // タブレット
+  $sp: 480px;  // スマホ
+  $breakpoint: 960px;
+
+  @mixin pc {
+    @media screen and (min-width: ($pc)) {
+      @content;
+    }
+  }
+  @mixin tab {
+    @media screen and (min-width: ($sp)) and (max-width: ($tab)) {
+      @content;
+    }
+  }
+  @mixin sp {
+    @media screen and (max-width: ($sp)) {
+      @content;
+    }
+  }
+  @mixin breakpoint {
+    @media screen and (min-width: ($tab)) and (max-width: ($breakpoint)) {
+      @content;
+    }
+  }
+
 body{
   background: rgb(244, 244, 244);
 }

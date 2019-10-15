@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  authorize_resource
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
 
@@ -40,11 +41,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(
-      title:post_params[:title],
-      content:post_params[:content],
-      image_name: post_params[:image_name])
-    tag_list = post_params[:tag_list].split(',')
+    @post = Post.new(post_params.except(:tag_list))
+    tag_list = post_params[:tag_list].split(/\s*,\s*/)
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: '投稿できました' }
@@ -60,13 +58,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-
-    tag_list = post_params[:tag_list].split(',')
+    tag_list = post_params[:tag_list].split(/\s*,\s*/)
     respond_to do |format|
       if @post.update(title:post_params[:title],
         content:post_params[:content],
-        image_name: post_params[:image_name],
-        user_id: post_params[:user_id])
+        image_name: post_params[:image_name])
         format.html { redirect_to @post, notice: '編集できませんでした' }
         format.json { render :show, status: :ok, location: @post }
         @post.save_posts(tag_list)
