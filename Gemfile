@@ -65,9 +65,22 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 #uploader
 gem 'carrierwave', '~> 2.0'
+
+gem 'fog'
 #thumbnail making
 gem 'rmagick'
 #pagination
 gem 'kaminari'
 #search
 gem 'ransack', github: 'activerecord-hackery/ransack'
+
+group :development, :test do
+ gem 'capistrano'
+ gem 'capistrano-bundler'
+ gem 'capistrano-rails'
+ gem 'capistrano-rbenv'
+end
+
+group :production, :staging do
+  gem 'unicorn'
+end
