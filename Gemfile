@@ -65,6 +65,7 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 #uploader
 gem 'carrierwave', '~> 2.0'
+gem 'fog'
 #thumbnail making
 gem 'rmagick'
 #pagination
