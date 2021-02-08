@@ -64,7 +64,7 @@ gem 'font-awesome-sass', '~> 5.11.2'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 #uploader
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 
 gem 'fog'
 #thumbnail making
